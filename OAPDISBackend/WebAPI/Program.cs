@@ -20,18 +20,10 @@ builder.Services.AddControllers();
 builder.Services.AddBussinessServices();
 builder.Services.AddSignalR();
 
-//Site bazlý izin bermek istiyorsak bura kullanýlmalý
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowOrigin",
-//        builder => builder.WithOrigins("https://localhost:4200", "yeni site", "yeni 2"));
-//});
-
-//Eðer tüm istekleri karþýlamak istiyorsak
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowOrigin",
-        builder => builder.WithOrigins("http://localhost:4200", "https://oapdis.ostimteknikuni.com")
+        option => option.WithOrigins("http://localhost:4200", builder.Configuration["Ftp:Web:Url"])
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials()
